@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.jgbravo.moneymate.android"
+    namespace = "com.jgbravo.moneymate"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.jgbravo.moneymate.android"
+        applicationId = "com.jgbravo.moneymate"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -40,10 +40,15 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":logger"))
+
     implementation("androidx.compose.ui:ui:1.5.2")
     implementation("androidx.compose.ui:ui-tooling:1.5.2")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
     implementation("androidx.compose.foundation:foundation:1.5.2")
     implementation("androidx.compose.material:material:1.5.2")
     implementation("androidx.activity:activity-compose:1.7.2")
+
+    implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
 }

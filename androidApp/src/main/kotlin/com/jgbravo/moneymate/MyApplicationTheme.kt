@@ -1,4 +1,4 @@
-package com.jgbravo.moneymate.android
+package com.jgbravo.moneymate
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
