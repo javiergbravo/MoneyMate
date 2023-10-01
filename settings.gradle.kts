@@ -17,3 +17,4 @@ rootProject.name = "MoneyMate"
 include(":androidApp")
 include(":core")
 include(":logger")
+include(":feature:user")

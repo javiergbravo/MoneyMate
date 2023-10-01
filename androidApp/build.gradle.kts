@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":logger"))
+    implementation(project(":feature:user"))
 
     implementation("androidx.compose.ui:ui:1.5.2")
     implementation("androidx.compose.ui:ui-tooling:1.5.2")
