@@ -21,7 +21,7 @@ class ANDLoginViewModel(
 
     val state = viewModel.state.combine(loginManager.loginState) { loginState, signInState ->
         loginState.copy(
-            isUserLoggedIn = signInState.isSignInSuccessful
+            isUserLoggedIn = signInState.isUserLoggedIn
         )
     }.stateIn(
         scope = viewModelScope,

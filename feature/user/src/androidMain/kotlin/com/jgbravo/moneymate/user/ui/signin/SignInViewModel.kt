@@ -5,8 +5,7 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jgbravo.logger.Logger
-import com.jgbravo.moneymate.core.data.Response.Failure
-import com.jgbravo.moneymate.core.data.Response.Success
+import com.jgbravo.moneymate.core.data.Result
 import com.jgbravo.moneymate.core.utils.EMPTY_STRING
 import com.jgbravo.moneymate.user.data.AuthRepository
 import com.jgbravo.moneymate.user.domain.Validator
@@ -97,10 +96,8 @@ class SignInViewModel(
                 lastState.copy(
                     isLoading = false,
                     event = when (response) {
-                        is Success<*> -> OnLoginSuccess
-                        is Failure -> {
-                            OnLoginFailure(errorMessage = response.exception.message ?: EMPTY_STRING)
-                        }
+                        Result.Success -> OnLoginSuccess
+                        is Result.Failure -> OnLoginFailure(errorMessage = response.exception.message ?: EMPTY_STRING)
                     }
                 )
             }

@@ -16,7 +16,7 @@ class Validator {
     fun validatePassword(password: String): ValidatorResult {
         return when {
             password.isBlank() -> ValidatorResult.IsNotValid(R.string.password_is_empty)
-            password.length >= 6 -> ValidatorResult.IsValid
+            password.length >= 8 -> ValidatorResult.IsValid
             else -> ValidatorResult.IsNotValid(R.string.invalid_password)
         }
     }

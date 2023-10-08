@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.errorprone.annotations.Immutable
 import com.jgbravo.logger.Logger
-import com.jgbravo.moneymate.core.data.Response
+import com.jgbravo.moneymate.core.data.Result
 import com.jgbravo.moneymate.core.utils.EMPTY_STRING
 import com.jgbravo.moneymate.user.data.AuthRepository
 import com.jgbravo.moneymate.user.domain.Validator
@@ -19,6 +19,8 @@ import com.jgbravo.moneymate.user.ui.signup.SignUpAction.OnSignInClick
 import com.jgbravo.moneymate.user.ui.signup.SignUpAction.OnSignUpButtonClick
 import com.jgbravo.moneymate.user.ui.signup.SignUpAction.PasswordChanged
 import com.jgbravo.moneymate.user.ui.signup.SignUpAction.ResetEvent
+import com.jgbravo.moneymate.user.ui.signup.SignUpState.Event.OnSignUpFailure
+import com.jgbravo.moneymate.user.ui.signup.SignUpState.Event.OnSignUpSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -100,12 +102,12 @@ class SignUpViewModel(
             )
             _state.update { it.copy(isLoading = false) }
             when (response) {
-                is Response.Success -> _state.update {
-                    it.copy(event = SignUpState.Event.OnSignUpSuccess)
+                Result.Success -> _state.update {
+                    it.copy(event = OnSignUpSuccess)
                 }
-                is Response.Failure -> _state.update {
+                is Result.Failure -> _state.update {
                     it.copy(
-                        event = SignUpState.Event.OnSignUpFailure(
+                        event = OnSignUpFailure(
                             errorMessage = response.exception.message ?: EMPTY_STRING
                         )
                     )
@@ -114,7 +116,7 @@ class SignUpViewModel(
         }
     }
 
-    private suspend fun signUpWithEmailAndPassword(email: String, password: String): Response<Any> {
+    private suspend fun signUpWithEmailAndPassword(email: String, password: String): Result {
         return repo.firebaseSignUpWithEmailAndPassword(email, password)
     }
 }

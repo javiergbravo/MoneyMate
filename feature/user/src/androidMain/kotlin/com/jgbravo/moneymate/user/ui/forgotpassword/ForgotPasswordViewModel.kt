@@ -4,8 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jgbravo.logger.Logger
-import com.jgbravo.moneymate.core.data.Response.Failure
-import com.jgbravo.moneymate.core.data.Response.Success
+import com.jgbravo.moneymate.core.data.Result
 import com.jgbravo.moneymate.core.utils.EMPTY_STRING
 import com.jgbravo.moneymate.user.data.AuthRepository
 import com.jgbravo.moneymate.user.domain.Validator
@@ -16,6 +15,8 @@ import com.jgbravo.moneymate.user.ui.forgotpassword.ForgotPasswordAction.FocusOn
 import com.jgbravo.moneymate.user.ui.forgotpassword.ForgotPasswordAction.OnBackClick
 import com.jgbravo.moneymate.user.ui.forgotpassword.ForgotPasswordAction.OnForgotPasswordButtonClick
 import com.jgbravo.moneymate.user.ui.forgotpassword.ForgotPasswordAction.ResetEvent
+import com.jgbravo.moneymate.user.ui.forgotpassword.ForgotPasswordState.Event.OnForgotPasswordFailure
+import com.jgbravo.moneymate.user.ui.forgotpassword.ForgotPasswordState.Event.OnForgotPasswordSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -74,12 +75,10 @@ class ForgotPasswordViewModel(
                 lastState.copy(
                     isLoading = false,
                     event = when (response) {
-                        is Success<*> -> ForgotPasswordState.Event.OnForgotPasswordSuccess
-                        is Failure -> {
-                            ForgotPasswordState.Event.OnForgotPasswordFailure(
-                                errorMessage = response.exception.message ?: EMPTY_STRING
-                            )
-                        }
+                        Result.Success -> OnForgotPasswordSuccess
+                        is Result.Failure -> OnForgotPasswordFailure(
+                            errorMessage = response.exception.message ?: EMPTY_STRING
+                        )
                     }
                 )
             }
