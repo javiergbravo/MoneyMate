@@ -1,6 +1,11 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.codingfeline.buildkonfig")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -82,4 +87,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
     }
+}
+
+buildkonfig {
+    packageName = "com.jgbravo.moneymate.user"
+
+    defaultConfigs {
+        buildConfigField(type = STRING, name = "GOOGLE_AUTH_KEY", value = getGoogleAuthKey())
+    }
+}
+
+fun getGoogleAuthKey(): String {
+    val propFile = rootProject.file("./././secrets.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(propFile))
+    return properties["GOOGLE_AUTH_KEY"] as? String ?: ""
 }

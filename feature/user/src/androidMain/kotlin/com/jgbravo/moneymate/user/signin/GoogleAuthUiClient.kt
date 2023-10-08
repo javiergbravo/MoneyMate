@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.jgbravo.logger.Logger
 import com.jgbravo.moneymate.core.data.Response
+import com.jgbravo.moneymate.user.BuildKonfig
 import com.jgbravo.moneymate.user.data.UserInfoData
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CancellationException
@@ -84,7 +85,7 @@ class GoogleAuthUiClient(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     .setFilterByAuthorizedAccounts(false)
-                    .setServerClientId("364686885666-eldaon7etsjjolr0ljj6t28ne2gc9t7d.apps.googleusercontent.com") //TODO: drop from here
+                    .setServerClientId(BuildKonfig.GOOGLE_AUTH_KEY)
                     .build()
             )
             .setAutoSelectEnabled(true)
