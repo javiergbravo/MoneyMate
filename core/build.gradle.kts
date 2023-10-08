@@ -10,7 +10,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "20"
+                jvmTarget = "18"
             }
         }
     }
@@ -36,18 +36,33 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+
+        val androidMain by getting {
+            dependencies {
+                implementation("androidx.compose.ui:ui:1.5.3")
+                implementation("androidx.compose.ui:ui-tooling:1.5.3")
+                implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
+                implementation("androidx.compose.foundation:foundation:1.5.3")
+                implementation("androidx.compose.material:material:1.5.3")
+                implementation("androidx.compose.material:material-icons-extended:1.5.3")
+                implementation("androidx.activity:activity-compose:1.7.2")
+                implementation("androidx.navigation:navigation-compose:2.7.4")
+                implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+                implementation("io.coil-kt:coil-compose:2.2.2")
+            }
+        }
     }
 }
 
 android {
-    namespace = "com.jgbravo.moneymate"
+    namespace = "com.jgbravo.moneymate.core"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
 }

@@ -3,44 +3,89 @@ package com.jgbravo.moneymate.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.jgbravo.moneymate.user.ANDLoginViewModel
-import com.jgbravo.moneymate.user.LoginScreen
+import androidx.navigation.compose.rememberNavController
+import com.jgbravo.moneymate.user.ui.navigation.UserNavGraph
 
 class MainActivity : ComponentActivity() {
+
+//    private val googleAuthUiClient by lazy {
+//        GoogleAuthUiClient(oneTapClient = Identity.getSignInClient(applicationContext))
+//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApplicationTheme {
-                val viewModel by viewModels<ANDLoginViewModel>() //TODO: Inject with koin
-                val state by viewModel.state.collectAsState()
-
-                LoginScreen(
-                    state = state,
-                    onEvent = viewModel::onEvent,
-                    modifier = Modifier.fillMaxSize()
-                )
+            MaterialTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    val navController = rememberNavController()
+                    UserNavGraph(
+                        navController = navController
+                    )
+                }
             }
+            /*MyApplicationTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = "login") {
+                        composable("login") {
+
+                            val viewModel: ANDLoginViewModel by viewModel()
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+
+                            val launcher = rememberLauncherForActivityResult(
+                                contract = ActivityResultContracts.StartIntentSenderForResult(),
+                                onResult = { result ->
+                                    if (result.resultCode == RESULT_OK) {
+                                        lifecycleScope.launch {
+                                            val signInResult = googleAuthUiClient.signInWithIntent(
+                                                intent = result.data ?: return@launch
+                                            )
+                                            viewModel.loginManager.onSignInResult(signInResult)
+                                        }
+                                    }
+                                }
+                            )
+                            
+                            LaunchedEffect(key1 = state.isUserLoggedIn) {
+                                if (state.isUserLoggedIn) {
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "User logged in",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+
+                            LoginScreen(
+                                state = state,
+                                onAction = { action ->
+                                    when (action) {
+                                        is OnGoogleLoginClicked -> {
+                                            lifecycleScope.launch {
+                                                val signInIntentSender = googleAuthUiClient.signIn()
+                                                launcher.launch(
+                                                    Builder(
+                                                        signInIntentSender ?: return@launch
+                                                    ).build()
+                                                )
+                                            }
+                                        }
+                                        else -> viewModel.onAction(action)
+                                    }
+                                },
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+                    }
+                }
+            }*/
         }
-    }
-}
-
-@Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView("Hello, Android!")
     }
 }

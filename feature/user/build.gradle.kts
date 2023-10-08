@@ -10,7 +10,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "20"
+                jvmTarget = "18"
             }
         }
     }
@@ -33,6 +33,8 @@ kotlin {
 
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 implementation("io.insert-koin:koin-core:3.5.0")
+
+//                implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
             }
         }
         val commonTest by getting {
@@ -42,15 +44,23 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.compose.ui:ui:1.5.2")
-                implementation("androidx.compose.ui:ui-tooling:1.5.2")
-                implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
-                implementation("androidx.compose.foundation:foundation:1.5.2")
-                implementation("androidx.compose.material:material:1.5.2")
+                implementation("androidx.compose.ui:ui:1.5.3")
+                implementation("androidx.compose.ui:ui-tooling:1.5.3")
+                implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
+                implementation("androidx.compose.foundation:foundation:1.5.3")
+                implementation("androidx.compose.material3:material3:1.2.0-alpha09")
+                implementation("androidx.compose.material:material-icons-extended:1.5.3")
                 implementation("androidx.activity:activity-compose:1.7.2")
+                implementation("androidx.navigation:navigation-compose:2.7.4")
+                implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+                implementation("com.google.accompanist:accompanist-navigation-animation:0.33.2-alpha")
+                implementation("io.coil-kt:coil-compose:2.2.2")
 
                 implementation("io.insert-koin:koin-android:3.5.0")
                 implementation("io.insert-koin:koin-androidx-compose:3.5.0")
+
+                implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+                implementation("com.google.android.gms:play-services-auth:20.7.0")
             }
         }
     }
@@ -69,7 +79,7 @@ android {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
 }
