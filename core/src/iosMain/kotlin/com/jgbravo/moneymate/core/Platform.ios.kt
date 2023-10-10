@@ -1,4 +1,4 @@
-package com.jgbravo.moneymate
+package com.jgbravo.moneymate.core
 
 import platform.UIKit.UIDevice
 
