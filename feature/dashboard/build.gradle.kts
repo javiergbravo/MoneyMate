@@ -14,21 +14,25 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "core"
+            baseName = "dashboard"
         }
     }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":core"))
+                implementation(project(":logger"))
+
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+                implementation("io.insert-koin:koin-core:3.5.0")
             }
         }
         val commonTest by getting {
@@ -36,7 +40,6 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-
         val androidMain by getting {
             dependencies {
                 implementation("androidx.compose.ui:ui:1.5.3")
@@ -49,18 +52,25 @@ kotlin {
                 implementation("androidx.navigation:navigation-compose:2.7.4")
                 implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
                 implementation("io.coil-kt:coil-compose:2.2.2")
+
+                implementation("io.insert-koin:koin-android:3.5.0")
             }
         }
     }
 }
 
 android {
-    namespace = "com.jgbravo.moneymate.core"
+    namespace = "com.jgbravo.moneymate.dashboard"
     compileSdk = 34
     defaultConfig {
         minSdk = 26
     }
-
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18

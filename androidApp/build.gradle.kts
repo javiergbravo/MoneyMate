@@ -48,10 +48,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling:1.5.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
     implementation("androidx.compose.foundation:foundation:1.5.3")
-    implementation("androidx.compose.material:material:1.5.3")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha09")
+    implementation("androidx.compose.material:material-icons-extended:1.5.3")
+    implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
 
     implementation("io.insert-koin:koin-android:3.5.0")
     implementation("io.insert-koin:koin-androidx-compose:3.5.0")
