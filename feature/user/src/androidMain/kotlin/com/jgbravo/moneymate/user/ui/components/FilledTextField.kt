@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +22,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.jgbravo.moneymate.core.ui.theme.RedStop
 import com.jgbravo.moneymate.user.R
 
 @Composable
@@ -49,7 +49,7 @@ fun FilledTextField(
                 Text(
                     modifier = modifier,
                     text = stringResource(id = error),
-                    color = RedStop
+                    color = MaterialTheme.colorScheme.error
                 )
             }
         },
