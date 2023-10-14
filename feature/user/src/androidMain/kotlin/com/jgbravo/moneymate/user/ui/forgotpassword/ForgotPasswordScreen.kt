@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.user.R
 import com.jgbravo.moneymate.user.ui.components.BackIcon
 import com.jgbravo.moneymate.user.ui.components.FilledTextField
@@ -99,11 +102,16 @@ fun ForgotPasswordScreen(
                 onClick = {
                     keyboard?.hide()
                     onAction(OnForgotPasswordButtonClick)
-                }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                ),
             ) {
                 Text(
                     text = stringResource(id = R.string.reset_password),
-                    fontSize = 15.sp
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colorScheme.primaryContainer
                 )
             }
         }
@@ -113,9 +121,11 @@ fun ForgotPasswordScreen(
 @Preview
 @Composable
 fun ForgotPasswordScreenPreview() {
-    ForgotPasswordScreen(
-        state = ForgotPasswordState(),
-        onAction = {},
-        onForgotPasswordSuccess = {}
-    )
+    MoneyMateTheme {
+        ForgotPasswordScreen(
+            state = ForgotPasswordState(),
+            onAction = {},
+            onForgotPasswordSuccess = {}
+        )
+    }
 }

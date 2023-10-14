@@ -22,7 +22,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.jgbravo.moneymate.user.R
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
+import com.jgbravo.moneymate.user.R.string
 
 @Composable
 fun FilledTextField(
@@ -90,10 +91,12 @@ fun FilledTextField(
 @Preview
 @Composable
 fun SimpleFilledTextFieldSamplePreview() {
-    FilledTextField(
-        label = R.string.email,
-        text = "Pérdida de grasa",
-        onTextChange = {},
-        error = R.string.invalid_email,
-    )
+    MoneyMateTheme {
+        FilledTextField(
+            label = string.email,
+            text = "Pérdida de grasa",
+            onTextChange = {},
+            error = string.invalid_email,
+        )
+    }
 }

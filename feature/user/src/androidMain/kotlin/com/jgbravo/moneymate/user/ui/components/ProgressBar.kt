@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 
 @Composable
 fun ProgressBar() {
@@ -21,5 +22,7 @@ fun ProgressBar() {
 @Preview
 @Composable
 fun ProgressBarPreview() {
-    ProgressBar()
+    MoneyMateTheme {
+        ProgressBar()
+    }
 }

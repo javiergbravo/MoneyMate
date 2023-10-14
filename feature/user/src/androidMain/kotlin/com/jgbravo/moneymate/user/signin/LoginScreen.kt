@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.user.ui.LoginAction
 import com.jgbravo.moneymate.user.ui.LoginAction.OnEmailTextChanged
 import com.jgbravo.moneymate.user.ui.LoginAction.OnPasswordTextChanged
@@ -120,8 +121,10 @@ fun LoginScreen(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen(
-        state = LoginState(),
-        onAction = {}
-    )
+    MoneyMateTheme {
+        LoginScreen(
+            state = LoginState(),
+            onAction = {}
+        )
+    }
 }

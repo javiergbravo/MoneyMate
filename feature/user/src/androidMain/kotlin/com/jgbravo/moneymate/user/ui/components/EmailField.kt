@@ -10,6 +10,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.user.R
 
 @Composable
@@ -46,8 +47,10 @@ fun EmailField(
 @Preview
 @Composable
 fun EmailFieldPreview() {
-    EmailField(
-        email = "",
-        onEmailValueChange = {}
-    )
+    MoneyMateTheme {
+        EmailField(
+            email = "",
+            onEmailValueChange = {}
+        )
+    }
 }

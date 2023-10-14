@@ -6,6 +6,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 
 @Composable
 fun BackIcon(
@@ -24,7 +25,9 @@ fun BackIcon(
 @Preview
 @Composable
 fun BackIconPreview() {
-    BackIcon(
-        navigateBack = {}
-    )
+    MoneyMateTheme {
+        BackIcon(
+            navigateBack = {}
+        )
+    }
 }

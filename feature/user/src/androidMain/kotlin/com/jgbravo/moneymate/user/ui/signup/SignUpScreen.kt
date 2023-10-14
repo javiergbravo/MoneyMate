@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.user.R
 import com.jgbravo.moneymate.user.ui.components.BackIcon
 import com.jgbravo.moneymate.user.ui.components.FilledTextField
@@ -140,9 +141,11 @@ fun SignUpScreen(
 @Preview
 @Composable
 fun SignUpScreenPreview() {
-    SignUpScreen(
-        state = SignUpState(),
-        onAction = {},
-        onSignUpSuccess = {}
-    )
+    MoneyMateTheme {
+        SignUpScreen(
+            state = SignUpState(),
+            onAction = {},
+            onSignUpSuccess = {}
+        )
+    }
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.user.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,9 +102,11 @@ fun TopBar(
 @Preview
 @Composable
 fun TopBarPreview() {
-    TopBar(
-        title = "Toolbar Title",
-        signOut = {},
-        revokeAccess = {}
-    )
+    MoneyMateTheme {
+        TopBar(
+            title = "Toolbar Title",
+            signOut = {},
+            revokeAccess = {}
+        )
+    }
 }

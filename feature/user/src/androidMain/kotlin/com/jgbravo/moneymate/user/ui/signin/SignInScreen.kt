@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.user.R
 import com.jgbravo.moneymate.user.ui.components.FilledTextField
 import com.jgbravo.moneymate.user.ui.components.ProgressBar
@@ -149,9 +150,11 @@ fun SignInScreen(
 @Preview
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen(
-        state = SignInState(),
-        onAction = {},
-        onLoginSuccess = {}
-    )
+    MoneyMateTheme {
+        SignInScreen(
+            state = SignInState(),
+            onAction = {},
+            onLoginSuccess = {}
+        )
+    }
 }
