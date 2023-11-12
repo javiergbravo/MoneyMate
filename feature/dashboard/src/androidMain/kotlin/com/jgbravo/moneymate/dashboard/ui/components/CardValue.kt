@@ -39,9 +39,7 @@ fun CardValue(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+        modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Row(
@@ -64,18 +62,14 @@ fun CardValue(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = when (movement.type) {
+                        text = movement.concept ?: when (movement.type) {
                             INCOME -> "Ingresos"
                             EXPENSE -> "Gastos"
                             INVESTMENT -> "Inversión"
                             SAVING -> "Ahorro"
                         },
                         style = MaterialTheme.typography.bodySmall,
-                        color = when (movement.type) {
-                            INCOME -> Color(ExtraColor.Green)
-                            EXPENSE -> Color(ExtraColor.RedStop)
-                            else -> MaterialTheme.colorScheme.scrim
-                        }
+                        color = MaterialTheme.colorScheme.scrim
                     )
                     val amount = when (movement.type) {
                         EXPENSE -> "-${movement.amount}"
@@ -84,6 +78,7 @@ fun CardValue(
                     Text(
                         text = "$amount ${movement.currency.symbol}",
                         style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.scrim
                     )
                 }
                 if (totalAmount != 0.0) {

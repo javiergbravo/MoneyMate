@@ -8,6 +8,7 @@ import com.jgbravo.moneymate.dashboard.models.Movement
 import com.jgbravo.moneymate.dashboard.models.MovementType
 import com.jgbravo.moneymate.dashboard.models.Pocket
 import com.jgbravo.moneymate.dashboard.models.Wallet
+import kotlin.math.round
 
 object Dummy {
 
@@ -124,4 +125,43 @@ object Dummy {
         investmentsAmount = 1200.00,
         savingsAmount = 300.0
     )
+
+    fun getMonthlyMovements(totalAmount: Double): List<Movement> {
+        val fixedCost = 568.33
+        val variableCost = 650.0
+        val investment = 1000.0
+        val saving = 400.0
+        return listOf(
+            Movement(
+                concept = "Gastos Fijos",
+                amount = fixedCost,
+                currency = Currency.EUR,
+                type = MovementType.EXPENSE
+            ),
+            Movement(
+                concept = "Gastos Variables",
+                amount = variableCost,
+                currency = Currency.EUR,
+                type = MovementType.EXPENSE
+            ),
+            Movement(
+                concept = "Inversión",
+                amount = investment,
+                currency = Currency.EUR,
+                type = MovementType.INCOME
+            ),
+            Movement(
+                concept = "Ahorro",
+                amount = saving,
+                currency = Currency.EUR,
+                type = MovementType.INCOME
+            ),
+            Movement(
+                concept = "Gastos Extra",
+                amount = round(totalAmount - listOf(fixedCost, variableCost, investment, saving).sum()),
+                currency = Currency.EUR,
+                type = MovementType.INCOME
+            )
+        )
+    }
 }

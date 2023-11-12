@@ -21,6 +21,7 @@ import com.jgbravo.moneymate.core.ui.theme.AppTheme
 import com.jgbravo.moneymate.core.ui.theme.ExtraColor
 import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
 import com.jgbravo.moneymate.core.utils.extensions.percent
+import com.jgbravo.moneymate.core.utils.extensions.roundTo
 
 @Composable
 fun ProgressPercent(
@@ -50,7 +51,7 @@ fun ProgressPercent(
         ) {
             Text(
                 modifier = Modifier.padding(start = AppTheme.dimens.small, end = AppTheme.dimens.small),
-                text = "${progress.percent()} %",
+                text = "${progress.percent().roundTo(2)} %",
                 style = MaterialTheme.typography.labelSmall,
                 color = backgroundColor,
                 fontSize = 10.sp
