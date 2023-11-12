@@ -41,4 +41,11 @@ object ThemeColor {
 
 object ExtraColor {
     const val RedStop = 0xFFC4091E
+    const val Purple = 0xFF8E7CC3
+    const val Blue = 0xFF1155CC
+    const val Pink = 0xFFC27BA0
+    const val Platinum = ThemeColor.Platinum
+    const val Magenta = 0xFF741B47
+    const val RedBrown = 0xFF980000
+    const val Green = 0xFF38761D
 }

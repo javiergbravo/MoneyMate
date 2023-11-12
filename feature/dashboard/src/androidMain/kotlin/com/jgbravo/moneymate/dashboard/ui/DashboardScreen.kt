@@ -1,5 +1,6 @@
 package com.jgbravo.moneymate.dashboard.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,24 +16,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableDoubleStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
+import com.jgbravo.moneymate.dashboard.models.Budget
+import com.jgbravo.moneymate.dashboard.models.dummy.Dummy
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
-    amountIncome: Double = 5000.0,
+    budget: Budget,
     modifier: Modifier = Modifier
 ) {
-    var totalIncome by remember { mutableDoubleStateOf(amountIncome) }
     val incomeConcepts = listOf(
         IncomeConcept("Salario", 3500.0),
         IncomeConcept("Ventas", 1000.0),
@@ -43,7 +41,8 @@ fun DashboardScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         TopAppBar(
-            title = { Text(text = "Control de Finanzas") },
+            modifier = Modifier.background(MaterialTheme.colorScheme.background),
+            title = { Text(text = "Budget") },
 //            backgroundColor = MaterialTheme.colors.primarySurface
         )
 
@@ -51,7 +50,7 @@ fun DashboardScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             item {
-                IncomeSummary(totalIncome)
+                IncomeSummary(budget.incomeAmount)
             }
 
             items(incomeConcepts) { concept ->
@@ -116,6 +115,8 @@ data class IncomeConcept(val name: String, val amount: Double)
 @Composable
 fun DashboardPreview() {
     MoneyMateTheme {
-        DashboardScreen()
+        DashboardScreen(
+            budget = Dummy.FakeBudget
+        )
     }
 }
