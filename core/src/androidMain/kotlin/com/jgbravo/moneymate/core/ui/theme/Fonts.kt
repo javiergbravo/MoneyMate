@@ -1,6 +1,10 @@
 package com.jgbravo.moneymate.core.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -129,3 +133,14 @@ internal val MoneyMayteTypography = Typography().copy(
         letterSpacing = 0.5.sp
     )
 )
+
+internal val LocalTypography = staticCompositionLocalOf { MoneyMayteTypography }
+
+@Composable
+fun ProvideTypography(
+    typography: Typography,
+    content: @Composable () -> Unit
+) {
+    val typographySet = remember { typography }
+    CompositionLocalProvider(LocalTypography provides typographySet, content = content)
+}

@@ -1,34 +1,62 @@
 package com.jgbravo.moneymate.dashboard.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.jgbravo.moneymate.core.ui.theme.AppTheme
 import com.jgbravo.moneymate.core.ui.theme.ExtraColor
 import com.jgbravo.moneymate.core.ui.theme.MoneyMateTheme
+import com.jgbravo.moneymate.core.utils.extensions.percent
 
 @Composable
 fun ProgressPercent(
     progress: Float,
     progressColor: Color,
-    backgroundColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = Color.White
 ) {
-    LinearProgressIndicator(
-        progress = progress,
-        color = progressColor,
-        modifier = modifier
-            .height(4.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(backgroundColor),
-    )
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        LinearProgressIndicator(
+            progress = progress,
+            color = progressColor,
+            modifier = modifier
+                .height(AppTheme.dimens.small)
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(AppTheme.dimens.normal))
+                .background(backgroundColor),
+            trackColor = backgroundColor
+        )
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(16.dp))
+                .background(progressColor)
+        ) {
+            Text(
+                modifier = Modifier.padding(start = AppTheme.dimens.small, end = AppTheme.dimens.small),
+                text = "${progress.percent()} %",
+                style = MaterialTheme.typography.labelSmall,
+                color = backgroundColor,
+                fontSize = 10.sp
+            )
+        }
+    }
 }
 
 @Preview
@@ -36,8 +64,8 @@ fun ProgressPercent(
 fun ProgressPercentPreview() {
     MoneyMateTheme {
         ProgressPercent(
-            progress = 0.4f,
-            progressColor = Color(ExtraColor.Green)
+            progress = 0.5f,
+            progressColor = Color(ExtraColor.Green),
         )
     }
 }
