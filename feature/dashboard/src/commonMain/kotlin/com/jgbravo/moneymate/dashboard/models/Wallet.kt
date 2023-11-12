@@ -20,5 +20,5 @@ data class Movement(
 )
 
 enum class MovementType {
-    INCOME, EXPENSE
+    INCOME, EXPENSE, INVESTMENT, SAVING
 }
